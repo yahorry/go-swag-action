@@ -309,7 +309,7 @@ const command_1 = __nccwpck_require__(524);
 const extract_1 = __nccwpck_require__(1259);
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
-        const swagVersion = core.getInput('swagWersion', { required: true });
+        const swagVersion = core.getInput('swagVersion', { required: true });
         const toolPath = yield (0, extract_1.extractTool)(swagVersion);
         const command = core.getInput('command');
         if (command !== '') {
