@@ -1,11 +1,11 @@
 name: 'Go swaggo/swag tool'
-author: 'Yegor Rybchenko'
+author: 'Yahor Rybchanka'
 description: This action installs swag tool (https://github.com/swaggo/swag) to generate/test your golang application
 branding:
-  icon: 'book-open'  
+  icon: 'book-open'
   color: 'green'
 inputs:
-  swagWersion:
+  swagVersion:
     description: 'Version of swag'
     required: false
     default: '1.8.1'
@@ -13,10 +13,10 @@ inputs:
     description: 'swag command to execute. Optional'
     required: false
   equalToGoPath:
-    description: 'Specifies a path to docs.go file you want to compare with your commited docs.go file'
+    description: 'Specifies a path to docs.go file you want to compare with your committed docs.go file'
     required: false
   equalToGoOriginPath:
-    description: 'Specifies a path to docs.go file commited in the repository. Works only if "equalToGo" option is specified. Default is "docs/docs.go"'
+    description: 'Specifies a path to docs.go file committed in the repository. Works only if "equalToGo" option is specified. Default is "docs/docs.go"'
     required: false
 runs:
   using: 'node16'

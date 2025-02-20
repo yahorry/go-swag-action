@@ -4,7 +4,7 @@ import {execTool} from './command'
 import {extractTool} from './extract'
 
 export async function run(): Promise<void> {
-  const swagVersion = core.getInput('swagWersion', {required: true})
+  const swagVersion = core.getInput('swagVersion', {required: true})
   const toolPath = await extractTool(swagVersion)
 
   const command = core.getInput('command')

@@ -430,7 +430,7 @@ paths:
         name: default
         type: string
       produces:
-      - application/json
+      - text/plain
       responses:
         "200":
           description: answer
@@ -468,7 +468,7 @@ paths:
         required: true
         type: integer
       produces:
-      - application/json
+      - text/plain
       responses:
         "200":
           description: answer
@@ -506,7 +506,7 @@ paths:
         required: true
         type: integer
       produces:
-      - application/json
+      - text/plain
       responses:
         "200":
           description: answer
@@ -539,7 +539,7 @@ paths:
         required: true
         type: string
       produces:
-      - application/json
+      - text/plain
       responses:
         "200":
           description: answer
@@ -566,7 +566,7 @@ paths:
       - application/json
       description: do ping
       produces:
-      - application/json
+      - text/plain
       responses:
         "200":
           description: pong
@@ -651,6 +651,7 @@ paths:
       - example
 securityDefinitions:
   ApiKeyAuth:
+    description: Description for what is this security definition being used
     in: header
     name: Authorization
     type: apiKey
@@ -660,33 +661,29 @@ securityDefinitions:
     authorizationUrl: https://example.com/oauth/authorize
     flow: accessCode
     scopes:
-      admin: '                            Grants read and write access to administrative
-        information'
+      admin: Grants read and write access to administrative information
     tokenUrl: https://example.com/oauth/token
     type: oauth2
   OAuth2Application:
     flow: application
     scopes:
-      admin: '                             Grants read and write access to administrative
-        information'
-      write: '                             Grants write access'
+      admin: Grants read and write access to administrative information
+      write: Grants write access
     tokenUrl: https://example.com/oauth/token
     type: oauth2
   OAuth2Implicit:
     authorizationUrl: https://example.com/oauth/authorize
     flow: implicit
     scopes:
-      admin: '                          Grants read and write access to administrative
-        information'
-      write: '                          Grants write access'
+      admin: Grants read and write access to administrative information
+      write: Grants write access
     type: oauth2
   OAuth2Password:
     flow: password
     scopes:
-      admin: '                          Grants read and write access to administrative
-        information'
-      read: '                           Grants read access'
-      write: '                          Grants write access'
+      admin: Grants read and write access to administrative information
+      read: Grants read access
+      write: Grants write access
     tokenUrl: https://example.com/oauth/token
     type: oauth2
 swagger: "2.0"

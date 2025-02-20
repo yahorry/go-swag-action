@@ -22,6 +22,6 @@ jobs:
       - uses: ./
         with:
           command: init -d example_test -ot go
-          swagWersion: 1.8.1
+          swagVersion: 1.16.4
           equalToGoPath: docs/docs.go
           equalToGoOriginPath: example_test/docs/docs.go
