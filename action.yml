@@ -8,7 +8,7 @@ inputs:
   swagVersion:
     description: 'Version of swag'
     required: false
-    default: '1.8.1'
+    default: '1.16.4'
   command:
     description: 'swag command to execute. Optional'
     required: false
@@ -19,5 +19,5 @@ inputs:
     description: 'Specifies a path to docs.go file committed in the repository. Works only if "equalToGo" option is specified. Default is "docs/docs.go"'
     required: false
 runs:
-  using: 'node16'
+  using: 'node20'
   main: 'dist/index.js'
