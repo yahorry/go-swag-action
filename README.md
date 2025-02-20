@@ -38,7 +38,7 @@ It's an example from current repository. Go project is taken from <https://githu
 - uses: yegorrybchenko/go-swag-action@v0.1
   with:
     command: init -d example_test -ot go
-    swagVersion: 1.8.1
+    swagVersion: 1.16.4
     equalToGoPath: docs/docs.go
     equalToGoOriginPath: example_test/docs/docs.go
 ```
