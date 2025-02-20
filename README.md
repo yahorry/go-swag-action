@@ -1,4 +1,4 @@
-[![Link](https://github.com/yegorrybchenko/go-swag-action/workflows/build-test/badge.svg?branch=main "Actions status")](https://github.com/yegorrybchenko/go-swag-action/actions)
+[![Link](https://github.com/yegorrybchenko/go-swag-action/workflows/build-test/badge.svg "Actions status")](https://github.com/yegorrybchenko/go-swag-action/actions)
 
 # Swag tool for golang applications
 
