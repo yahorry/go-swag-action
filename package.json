@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "description": "Github action for swaggo/swag tool",
+  "type": "module",
   "main": "lib/main.js",
   "scripts": {
     "build": "tsc",
@@ -11,7 +12,7 @@
     "lint": "eslint src/**/*.ts",
     "package": "ncc build --source-map --license licenses.txt",
     "build-package": "tsc && ncc build --source-map --license licenses.txt",
-    "test": "jest",
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest",
     "all": "npm run build && npm run format && npm run lint && npm run package && npm test"
   },
   "repository": {
@@ -26,8 +27,9 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@actions/core": "^1.6.0",
-    "@actions/tool-cache": "^1.7.2",
+    "@actions/core": "^3.0.1",
+    "@actions/exec": "^3.0.0",
+    "@actions/tool-cache": "^4.0.0",
     "ansi-styles": "^6.1.0",
     "diff": "^9.0.0"
   },

@@ -1,5 +1,5 @@
 import {expect, test} from '@jest/globals'
-import {getCandidateDownloadPaths} from '../src/extract'
+import {getCandidateDownloadPaths} from '../src/extract.js'
 
 const originalPlatform = process.platform
 const originalArch = process.arch
