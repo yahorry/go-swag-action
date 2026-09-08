@@ -1,7 +1,7 @@
 import * as core from '@actions/core'
-import {compareGoFiles} from './compare-go-files'
-import {execTool} from './command'
-import {extractTool} from './extract'
+import {compareGoFiles} from './compare-go-files.js'
+import {execTool} from './command.js'
+import {extractTool} from './extract.js'
 
 export async function run(): Promise<void> {
   const swagVersion = core.getInput('swagVersion', {required: true})

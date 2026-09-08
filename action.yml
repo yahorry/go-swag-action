@@ -19,5 +19,5 @@ inputs:
     description: 'Specifies a path to docs.go file committed in the repository. Works only if "equalToGo" option is specified. Default is "docs/docs.go"'
     required: false
 runs:
-  using: 'node20'
+  using: 'node24'
   main: 'dist/index.js'
