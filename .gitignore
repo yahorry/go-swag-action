@@ -100,3 +100,8 @@ lib/**/*
 
 # Ignore .ssh
 .ssh
+
+#IDEs
+.vscode
+.idea
+.cursor
