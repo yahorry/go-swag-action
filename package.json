@@ -32,7 +32,7 @@
     "diff": "^9.0.0"
   },
   "devDependencies": {
-    "@types/node": "^17.0.23",
+    "@types/node": "^22.20.1",
     "@typescript-eslint/eslint-plugin": "^5.18.0",
     "@typescript-eslint/parser": "^5.18.0",
     "@vercel/ncc": "^0.45.0",
@@ -43,7 +43,7 @@
     "js-yaml": "^4.3.2",
     "prettier": "2.6.2",
     "ts-jest": "^29.4.12",
-    "typescript": "^4.4.4"
+    "typescript": "^5.9.3"
   },
   "overrides": {
     "undici": "^6.28.0"
