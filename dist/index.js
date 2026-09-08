@@ -171,7 +171,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.extractTool = void 0;
+exports.getCandidateDownloadPaths = exports.extractTool = void 0;
 const core = __importStar(__nccwpck_require__(2186));
 const tc = __importStar(__nccwpck_require__(7784));
 const fs_1 = __importDefault(__nccwpck_require__(7147));
@@ -180,10 +180,26 @@ const path_1 = __importDefault(__nccwpck_require__(1017));
 const downloadPath = 'https://github.com/swaggo/swag/releases/download/';
 function extractTool(version) {
     return __awaiter(this, void 0, void 0, function* () {
-        const fullDownloadPath = getFullDownloadPath(version);
-        core.debug(`Download path is ${fullDownloadPath}`);
+        const candidates = getCandidateDownloadPaths(version);
         core.info(`Installing swag tool ${version} ...`);
-        const toolPathZip = yield tc.downloadTool(fullDownloadPath);
+        let toolPathZip;
+        let lastError;
+        for (const fullDownloadPath of candidates) {
+            core.debug(`Download path is ${fullDownloadPath}`);
+            try {
+                toolPathZip = yield tc.downloadTool(fullDownloadPath);
+                break;
+            }
+            catch (error) {
+                lastError = error;
+                core.debug(`Failed to download from "${fullDownloadPath}": ${String(error)}`);
+            }
+        }
+        if (!toolPathZip) {
+            throw lastError instanceof Error
+                ? lastError
+                : new Error(`Failed to download swag ${version}`);
+        }
         const toolPathDirectory = yield tc.extractTar(toolPathZip);
         const swagToolPath = path_1.default.join(toolPathDirectory, 'swag');
         const newSwagToolPath = path_1.default.join(_getHOMEDirectory(), 'swag');
@@ -194,18 +210,29 @@ function extractTool(version) {
     });
 }
 exports.extractTool = extractTool;
-function getFullDownloadPath(version) {
-    let platform;
+function getCandidateDownloadPaths(version) {
+    const platform = getPlatform();
+    return getArchCandidates().map(arch => `${downloadPath}v${version}/swag_${version}_${platform}_${arch}.tar.gz`);
+}
+exports.getCandidateDownloadPaths = getCandidateDownloadPaths;
+function getPlatform() {
     if (process.platform === 'linux') {
-        platform = 'Linux';
+        return 'Linux';
     }
-    else if (process.platform === 'darwin') {
-        platform = 'Darwin';
+    if (process.platform === 'darwin') {
+        return 'Darwin';
     }
-    else {
-        throw new Error(`Platform ${process.platform} is not supported`);
+    throw new Error(`Platform ${process.platform} is not supported`);
+}
+function getArchCandidates() {
+    if (process.arch === 'arm64') {
+        return ['arm64'];
     }
-    return `${downloadPath}v${version}/swag_${version}_${platform}_x86_64.tar.gz`;
+    if (process.arch === 'x64') {
+        // Most releases use x86_64; some (e.g. 1.16.3) publish amd64 instead.
+        return ['x86_64', 'amd64'];
+    }
+    throw new Error(`Arch ${process.arch} is not supported`);
 }
 function _getHOMEDirectory() {
     const homeDirectory = process.env.HOME || '';

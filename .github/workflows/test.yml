@@ -20,11 +20,21 @@ jobs:
           npm run all
   test: # make sure the action works on a clean machine without building
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # 1.16.2 omitted: known bug keeps tabs in @scope descriptions (#1742),
+        # fixed in 1.16.3 — generated docs.go cannot match newer versions.
+        swag-version:
+          - '1.16.3'
+          - '1.16.4'
+          - '1.16.5'
+          - '1.16.6'
     steps:
       - uses: actions/checkout@v4
       - uses: ./
         with:
           command: init -d example_test -ot go
-          swagVersion: 1.16.4
+          swagVersion: ${{ matrix.swag-version }}
           equalToGoPath: docs/docs.go
           equalToGoOriginPath: example_test/docs/docs.go
