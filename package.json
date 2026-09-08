@@ -10,7 +10,7 @@
     "format": "prettier --write '**/*.ts'",
     "format-check": "prettier --check '**/*.ts'",
     "lint": "eslint src/**/*.ts",
-    "package": "esbuild src/main.ts --bundle --platform=node --target=node24 --format=cjs --outfile=dist/index.js --sourcemap --legal-comments=none && node -e \"require('fs').writeFileSync('dist/package.json', JSON.stringify({type:'commonjs'})+'\\n')\"",
+    "package": "node scripts/package.mjs",
     "build-package": "tsc && npm run package",
     "test": "NODE_OPTIONS=--experimental-vm-modules jest",
     "all": "npm run build && npm run format && npm run lint && npm run package && npm test"

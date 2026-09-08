@@ -16449,1709 +16449,22 @@ var require_cookies = __commonJS({
   }
 });
 
-// node_modules/undici/lib/web/websocket/events.js
+// undici-websocket-stub:./lib/web/websocket/events
 var require_events = __commonJS({
-  "node_modules/undici/lib/web/websocket/events.js"(exports2, module2) {
-    "use strict";
-    var { webidl } = require_webidl();
-    var { kEnumerableProperty } = require_util();
-    var { kConstruct } = require_symbols();
-    var { MessagePort } = require("node:worker_threads");
-    var MessageEvent = class _MessageEvent extends Event {
-      #eventInit;
-      constructor(type, eventInitDict = {}) {
-        if (type === kConstruct) {
-          super(arguments[1], arguments[2]);
-          webidl.util.markAsUncloneable(this);
-          return;
-        }
-        const prefix = "MessageEvent constructor";
-        webidl.argumentLengthCheck(arguments, 1, prefix);
-        type = webidl.converters.DOMString(type, prefix, "type");
-        eventInitDict = webidl.converters.MessageEventInit(eventInitDict, prefix, "eventInitDict");
-        super(type, eventInitDict);
-        this.#eventInit = eventInitDict;
-        webidl.util.markAsUncloneable(this);
-      }
-      get data() {
-        webidl.brandCheck(this, _MessageEvent);
-        return this.#eventInit.data;
-      }
-      get origin() {
-        webidl.brandCheck(this, _MessageEvent);
-        return this.#eventInit.origin;
-      }
-      get lastEventId() {
-        webidl.brandCheck(this, _MessageEvent);
-        return this.#eventInit.lastEventId;
-      }
-      get source() {
-        webidl.brandCheck(this, _MessageEvent);
-        return this.#eventInit.source;
-      }
-      get ports() {
-        webidl.brandCheck(this, _MessageEvent);
-        if (!Object.isFrozen(this.#eventInit.ports)) {
-          Object.freeze(this.#eventInit.ports);
-        }
-        return this.#eventInit.ports;
-      }
-      initMessageEvent(type, bubbles = false, cancelable = false, data = null, origin = "", lastEventId = "", source = null, ports = []) {
-        webidl.brandCheck(this, _MessageEvent);
-        webidl.argumentLengthCheck(arguments, 1, "MessageEvent.initMessageEvent");
-        return new _MessageEvent(type, {
-          bubbles,
-          cancelable,
-          data,
-          origin,
-          lastEventId,
-          source,
-          ports
-        });
-      }
-      static createFastMessageEvent(type, init) {
-        const messageEvent = new _MessageEvent(kConstruct, type, init);
-        messageEvent.#eventInit = init;
-        messageEvent.#eventInit.data ??= null;
-        messageEvent.#eventInit.origin ??= "";
-        messageEvent.#eventInit.lastEventId ??= "";
-        messageEvent.#eventInit.source ??= null;
-        messageEvent.#eventInit.ports ??= [];
-        return messageEvent;
-      }
-    };
-    var { createFastMessageEvent } = MessageEvent;
-    delete MessageEvent.createFastMessageEvent;
-    var CloseEvent = class _CloseEvent extends Event {
-      #eventInit;
-      constructor(type, eventInitDict = {}) {
-        const prefix = "CloseEvent constructor";
-        webidl.argumentLengthCheck(arguments, 1, prefix);
-        type = webidl.converters.DOMString(type, prefix, "type");
-        eventInitDict = webidl.converters.CloseEventInit(eventInitDict);
-        super(type, eventInitDict);
-        this.#eventInit = eventInitDict;
-        webidl.util.markAsUncloneable(this);
-      }
-      get wasClean() {
-        webidl.brandCheck(this, _CloseEvent);
-        return this.#eventInit.wasClean;
-      }
-      get code() {
-        webidl.brandCheck(this, _CloseEvent);
-        return this.#eventInit.code;
-      }
-      get reason() {
-        webidl.brandCheck(this, _CloseEvent);
-        return this.#eventInit.reason;
-      }
-    };
-    var ErrorEvent = class _ErrorEvent extends Event {
-      #eventInit;
-      constructor(type, eventInitDict) {
-        const prefix = "ErrorEvent constructor";
-        webidl.argumentLengthCheck(arguments, 1, prefix);
-        super(type, eventInitDict);
-        webidl.util.markAsUncloneable(this);
-        type = webidl.converters.DOMString(type, prefix, "type");
-        eventInitDict = webidl.converters.ErrorEventInit(eventInitDict ?? {});
-        this.#eventInit = eventInitDict;
-      }
-      get message() {
-        webidl.brandCheck(this, _ErrorEvent);
-        return this.#eventInit.message;
-      }
-      get filename() {
-        webidl.brandCheck(this, _ErrorEvent);
-        return this.#eventInit.filename;
-      }
-      get lineno() {
-        webidl.brandCheck(this, _ErrorEvent);
-        return this.#eventInit.lineno;
-      }
-      get colno() {
-        webidl.brandCheck(this, _ErrorEvent);
-        return this.#eventInit.colno;
-      }
-      get error() {
-        webidl.brandCheck(this, _ErrorEvent);
-        return this.#eventInit.error;
-      }
-    };
-    Object.defineProperties(MessageEvent.prototype, {
-      [Symbol.toStringTag]: {
-        value: "MessageEvent",
-        configurable: true
-      },
-      data: kEnumerableProperty,
-      origin: kEnumerableProperty,
-      lastEventId: kEnumerableProperty,
-      source: kEnumerableProperty,
-      ports: kEnumerableProperty,
-      initMessageEvent: kEnumerableProperty
-    });
-    Object.defineProperties(CloseEvent.prototype, {
-      [Symbol.toStringTag]: {
-        value: "CloseEvent",
-        configurable: true
-      },
-      reason: kEnumerableProperty,
-      code: kEnumerableProperty,
-      wasClean: kEnumerableProperty
-    });
-    Object.defineProperties(ErrorEvent.prototype, {
-      [Symbol.toStringTag]: {
-        value: "ErrorEvent",
-        configurable: true
-      },
-      message: kEnumerableProperty,
-      filename: kEnumerableProperty,
-      lineno: kEnumerableProperty,
-      colno: kEnumerableProperty,
-      error: kEnumerableProperty
-    });
-    webidl.converters.MessagePort = webidl.interfaceConverter(MessagePort);
-    webidl.converters["sequence<MessagePort>"] = webidl.sequenceConverter(
-      webidl.converters.MessagePort
-    );
-    var eventInit = [
-      {
-        key: "bubbles",
-        converter: webidl.converters.boolean,
-        defaultValue: () => false
-      },
-      {
-        key: "cancelable",
-        converter: webidl.converters.boolean,
-        defaultValue: () => false
-      },
-      {
-        key: "composed",
-        converter: webidl.converters.boolean,
-        defaultValue: () => false
-      }
-    ];
-    webidl.converters.MessageEventInit = webidl.dictionaryConverter([
-      ...eventInit,
-      {
-        key: "data",
-        converter: webidl.converters.any,
-        defaultValue: () => null
-      },
-      {
-        key: "origin",
-        converter: webidl.converters.USVString,
-        defaultValue: () => ""
-      },
-      {
-        key: "lastEventId",
-        converter: webidl.converters.DOMString,
-        defaultValue: () => ""
-      },
-      {
-        key: "source",
-        // Node doesn't implement WindowProxy or ServiceWorker, so the only
-        // valid value for source is a MessagePort.
-        converter: webidl.nullableConverter(webidl.converters.MessagePort),
-        defaultValue: () => null
-      },
-      {
-        key: "ports",
-        converter: webidl.converters["sequence<MessagePort>"],
-        defaultValue: () => new Array(0)
-      }
-    ]);
-    webidl.converters.CloseEventInit = webidl.dictionaryConverter([
-      ...eventInit,
-      {
-        key: "wasClean",
-        converter: webidl.converters.boolean,
-        defaultValue: () => false
-      },
-      {
-        key: "code",
-        converter: webidl.converters["unsigned short"],
-        defaultValue: () => 0
-      },
-      {
-        key: "reason",
-        converter: webidl.converters.USVString,
-        defaultValue: () => ""
-      }
-    ]);
-    webidl.converters.ErrorEventInit = webidl.dictionaryConverter([
-      ...eventInit,
-      {
-        key: "message",
-        converter: webidl.converters.DOMString,
-        defaultValue: () => ""
-      },
-      {
-        key: "filename",
-        converter: webidl.converters.USVString,
-        defaultValue: () => ""
-      },
-      {
-        key: "lineno",
-        converter: webidl.converters["unsigned long"],
-        defaultValue: () => 0
-      },
-      {
-        key: "colno",
-        converter: webidl.converters["unsigned long"],
-        defaultValue: () => 0
-      },
-      {
-        key: "error",
-        converter: webidl.converters.any
-      }
-    ]);
-    module2.exports = {
-      MessageEvent,
-      CloseEvent,
-      ErrorEvent,
-      createFastMessageEvent
-    };
+  "undici-websocket-stub:./lib/web/websocket/events"(exports2, module2) {
+    module2.exports = {};
   }
 });
 
-// node_modules/undici/lib/web/websocket/constants.js
-var require_constants5 = __commonJS({
-  "node_modules/undici/lib/web/websocket/constants.js"(exports2, module2) {
-    "use strict";
-    var uid = "258EAFA5-E914-47DA-95CA-C5AB0DC85B11";
-    var staticPropertyDescriptors = {
-      enumerable: true,
-      writable: false,
-      configurable: false
-    };
-    var states = {
-      CONNECTING: 0,
-      OPEN: 1,
-      CLOSING: 2,
-      CLOSED: 3
-    };
-    var sentCloseFrameState = {
-      NOT_SENT: 0,
-      PROCESSING: 1,
-      SENT: 2
-    };
-    var opcodes = {
-      CONTINUATION: 0,
-      TEXT: 1,
-      BINARY: 2,
-      CLOSE: 8,
-      PING: 9,
-      PONG: 10
-    };
-    var maxUnsigned16Bit = 2 ** 16 - 1;
-    var parserStates = {
-      INFO: 0,
-      PAYLOADLENGTH_16: 2,
-      PAYLOADLENGTH_64: 3,
-      READ_DATA: 4
-    };
-    var emptyBuffer = Buffer.allocUnsafe(0);
-    var sendHints = {
-      string: 1,
-      typedArray: 2,
-      arrayBuffer: 3,
-      blob: 4
-    };
-    module2.exports = {
-      uid,
-      sentCloseFrameState,
-      staticPropertyDescriptors,
-      states,
-      opcodes,
-      maxUnsigned16Bit,
-      parserStates,
-      emptyBuffer,
-      sendHints
-    };
-  }
-});
-
-// node_modules/undici/lib/web/websocket/symbols.js
-var require_symbols5 = __commonJS({
-  "node_modules/undici/lib/web/websocket/symbols.js"(exports2, module2) {
-    "use strict";
-    module2.exports = {
-      kWebSocketURL: Symbol("url"),
-      kReadyState: Symbol("ready state"),
-      kController: Symbol("controller"),
-      kResponse: Symbol("response"),
-      kBinaryType: Symbol("binary type"),
-      kSentClose: Symbol("sent close"),
-      kReceivedClose: Symbol("received close"),
-      kByteParser: Symbol("byte parser")
-    };
-  }
-});
-
-// node_modules/undici/lib/web/websocket/util.js
-var require_util7 = __commonJS({
-  "node_modules/undici/lib/web/websocket/util.js"(exports2, module2) {
-    "use strict";
-    var { kReadyState, kController, kResponse, kBinaryType, kWebSocketURL } = require_symbols5();
-    var { states, opcodes } = require_constants5();
-    var { ErrorEvent, createFastMessageEvent } = require_events();
-    var { isUtf8 } = require("node:buffer");
-    var { collectASequenceOfCodePointsFast, removeHTTPWhitespace } = require_data_url();
-    function isConnecting(ws) {
-      return ws[kReadyState] === states.CONNECTING;
-    }
-    function isEstablished(ws) {
-      return ws[kReadyState] === states.OPEN;
-    }
-    function isClosing(ws) {
-      return ws[kReadyState] === states.CLOSING;
-    }
-    function isClosed(ws) {
-      return ws[kReadyState] === states.CLOSED;
-    }
-    function fireEvent(e, target, eventFactory = (type, init) => new Event(type, init), eventInitDict = {}) {
-      const event = eventFactory(e, eventInitDict);
-      target.dispatchEvent(event);
-    }
-    function websocketMessageReceived(ws, type, data) {
-      if (ws[kReadyState] !== states.OPEN) {
-        return;
-      }
-      let dataForEvent;
-      if (type === opcodes.TEXT) {
-        try {
-          dataForEvent = utf8Decode(data);
-        } catch {
-          failWebsocketConnection(ws, "Received invalid UTF-8 in text frame.");
-          return;
-        }
-      } else if (type === opcodes.BINARY) {
-        if (ws[kBinaryType] === "blob") {
-          dataForEvent = new Blob([data]);
-        } else {
-          dataForEvent = toArrayBuffer(data);
-        }
-      }
-      fireEvent("message", ws, createFastMessageEvent, {
-        origin: ws[kWebSocketURL].origin,
-        data: dataForEvent
-      });
-    }
-    function toArrayBuffer(buffer) {
-      if (buffer.byteLength === buffer.buffer.byteLength) {
-        return buffer.buffer;
-      }
-      return buffer.buffer.slice(buffer.byteOffset, buffer.byteOffset + buffer.byteLength);
-    }
-    function isValidSubprotocol(protocol) {
-      if (protocol.length === 0) {
-        return false;
-      }
-      for (let i = 0; i < protocol.length; ++i) {
-        const code = protocol.charCodeAt(i);
-        if (code < 33 || // CTL, contains SP (0x20) and HT (0x09)
-        code > 126 || code === 34 || // "
-        code === 40 || // (
-        code === 41 || // )
-        code === 44 || // ,
-        code === 47 || // /
-        code === 58 || // :
-        code === 59 || // ;
-        code === 60 || // <
-        code === 61 || // =
-        code === 62 || // >
-        code === 63 || // ?
-        code === 64 || // @
-        code === 91 || // [
-        code === 92 || // \
-        code === 93 || // ]
-        code === 123 || // {
-        code === 125) {
-          return false;
-        }
-      }
-      return true;
-    }
-    function isValidStatusCode(code) {
-      if (code >= 1e3 && code < 1015) {
-        return code !== 1004 && // reserved
-        code !== 1005 && // "MUST NOT be set as a status code"
-        code !== 1006;
-      }
-      return code >= 3e3 && code <= 4999;
-    }
-    function failWebsocketConnection(ws, reason) {
-      const { [kController]: controller, [kResponse]: response } = ws;
-      controller.abort();
-      if (response?.socket && !response.socket.destroyed) {
-        response.socket.destroy();
-      }
-      if (reason) {
-        fireEvent("error", ws, (type, init) => new ErrorEvent(type, init), {
-          error: new Error(reason),
-          message: reason
-        });
-      }
-    }
-    function isControlFrame(opcode) {
-      return opcode === opcodes.CLOSE || opcode === opcodes.PING || opcode === opcodes.PONG;
-    }
-    function isContinuationFrame(opcode) {
-      return opcode === opcodes.CONTINUATION;
-    }
-    function isTextBinaryFrame(opcode) {
-      return opcode === opcodes.TEXT || opcode === opcodes.BINARY;
-    }
-    function isValidOpcode(opcode) {
-      return isTextBinaryFrame(opcode) || isContinuationFrame(opcode) || isControlFrame(opcode);
-    }
-    function parseExtensions(extensions) {
-      const position = { position: 0 };
-      const extensionList = /* @__PURE__ */ new Map();
-      while (position.position < extensions.length) {
-        const pair = collectASequenceOfCodePointsFast(";", extensions, position);
-        const [name, value = ""] = pair.split("=");
-        extensionList.set(
-          removeHTTPWhitespace(name, true, false),
-          removeHTTPWhitespace(value, false, true)
-        );
-        position.position++;
-      }
-      return extensionList;
-    }
-    function isValidClientWindowBits(value) {
-      if (value.length === 0) {
-        return false;
-      }
-      for (let i = 0; i < value.length; i++) {
-        const byte = value.charCodeAt(i);
-        if (byte < 48 || byte > 57) {
-          return false;
-        }
-      }
-      const num = Number.parseInt(value, 10);
-      return num >= 8 && num <= 15;
-    }
-    var hasIntl = typeof process.versions.icu === "string";
-    var fatalDecoder = hasIntl ? new TextDecoder("utf-8", { fatal: true }) : void 0;
-    var utf8Decode = hasIntl ? fatalDecoder.decode.bind(fatalDecoder) : function(buffer) {
-      if (isUtf8(buffer)) {
-        return buffer.toString("utf-8");
-      }
-      throw new TypeError("Invalid utf-8 received.");
-    };
-    module2.exports = {
-      isConnecting,
-      isEstablished,
-      isClosing,
-      isClosed,
-      fireEvent,
-      isValidSubprotocol,
-      isValidStatusCode,
-      failWebsocketConnection,
-      websocketMessageReceived,
-      utf8Decode,
-      isControlFrame,
-      isContinuationFrame,
-      isTextBinaryFrame,
-      isValidOpcode,
-      parseExtensions,
-      isValidClientWindowBits
-    };
-  }
-});
-
-// node_modules/undici/lib/web/websocket/frame.js
-var require_frame = __commonJS({
-  "node_modules/undici/lib/web/websocket/frame.js"(exports2, module2) {
-    "use strict";
-    var { maxUnsigned16Bit } = require_constants5();
-    var BUFFER_SIZE = 16386;
-    var crypto2;
-    var buffer = null;
-    var bufIdx = BUFFER_SIZE;
-    try {
-      crypto2 = require("node:crypto");
-    } catch {
-      crypto2 = {
-        // not full compatibility, but minimum.
-        randomFillSync: function randomFillSync(buffer2, _offset, _size) {
-          for (let i = 0; i < buffer2.length; ++i) {
-            buffer2[i] = Math.random() * 255 | 0;
-          }
-          return buffer2;
-        }
-      };
-    }
-    function generateMask() {
-      if (bufIdx === BUFFER_SIZE) {
-        bufIdx = 0;
-        crypto2.randomFillSync(buffer ??= Buffer.allocUnsafe(BUFFER_SIZE), 0, BUFFER_SIZE);
-      }
-      return [buffer[bufIdx++], buffer[bufIdx++], buffer[bufIdx++], buffer[bufIdx++]];
-    }
-    var WebsocketFrameSend = class {
-      /**
-       * @param {Buffer|undefined} data
-       */
-      constructor(data) {
-        this.frameData = data;
-      }
-      createFrame(opcode) {
-        const frameData = this.frameData;
-        const maskKey = generateMask();
-        const bodyLength = frameData?.byteLength ?? 0;
-        let payloadLength = bodyLength;
-        let offset = 6;
-        if (bodyLength > maxUnsigned16Bit) {
-          offset += 8;
-          payloadLength = 127;
-        } else if (bodyLength > 125) {
-          offset += 2;
-          payloadLength = 126;
-        }
-        const buffer2 = Buffer.allocUnsafe(bodyLength + offset);
-        buffer2[0] = buffer2[1] = 0;
-        buffer2[0] |= 128;
-        buffer2[0] = (buffer2[0] & 240) + opcode;
-        buffer2[offset - 4] = maskKey[0];
-        buffer2[offset - 3] = maskKey[1];
-        buffer2[offset - 2] = maskKey[2];
-        buffer2[offset - 1] = maskKey[3];
-        buffer2[1] = payloadLength;
-        if (payloadLength === 126) {
-          buffer2.writeUInt16BE(bodyLength, 2);
-        } else if (payloadLength === 127) {
-          buffer2[2] = buffer2[3] = 0;
-          buffer2.writeUIntBE(bodyLength, 4, 6);
-        }
-        buffer2[1] |= 128;
-        for (let i = 0; i < bodyLength; ++i) {
-          buffer2[offset + i] = frameData[i] ^ maskKey[i & 3];
-        }
-        return buffer2;
-      }
-    };
-    module2.exports = {
-      WebsocketFrameSend
-    };
-  }
-});
-
-// node_modules/undici/lib/web/websocket/connection.js
-var require_connection = __commonJS({
-  "node_modules/undici/lib/web/websocket/connection.js"(exports2, module2) {
-    "use strict";
-    var { uid, states, sentCloseFrameState, emptyBuffer, opcodes } = require_constants5();
-    var {
-      kReadyState,
-      kSentClose,
-      kByteParser,
-      kReceivedClose,
-      kResponse
-    } = require_symbols5();
-    var { fireEvent, failWebsocketConnection, isClosing, isClosed, isEstablished, parseExtensions } = require_util7();
-    var { channels } = require_diagnostics();
-    var { CloseEvent } = require_events();
-    var { makeRequest } = require_request2();
-    var { fetching } = require_fetch();
-    var { Headers: Headers2, getHeadersList } = require_headers();
-    var { getDecodeSplit } = require_util2();
-    var { WebsocketFrameSend } = require_frame();
-    var crypto2;
-    try {
-      crypto2 = require("node:crypto");
-    } catch {
-    }
-    function establishWebSocketConnection(url, protocols, client, ws, onEstablish, options) {
-      const requestURL = url;
-      requestURL.protocol = url.protocol === "ws:" ? "http:" : "https:";
-      const request = makeRequest({
-        urlList: [requestURL],
-        client,
-        serviceWorkers: "none",
-        referrer: "no-referrer",
-        mode: "websocket",
-        credentials: "include",
-        cache: "no-store",
-        redirect: "error"
-      });
-      if (options.headers) {
-        const headersList = getHeadersList(new Headers2(options.headers));
-        request.headersList = headersList;
-      }
-      const keyValue = crypto2.randomBytes(16).toString("base64");
-      request.headersList.append("sec-websocket-key", keyValue);
-      request.headersList.append("sec-websocket-version", "13");
-      for (const protocol of protocols) {
-        request.headersList.append("sec-websocket-protocol", protocol);
-      }
-      const permessageDeflate = "permessage-deflate; client_max_window_bits";
-      request.headersList.append("sec-websocket-extensions", permessageDeflate);
-      const controller = fetching({
-        request,
-        useParallelQueue: true,
-        dispatcher: options.dispatcher,
-        processResponse(response) {
-          if (response.type === "error" || response.status !== 101) {
-            failWebsocketConnection(ws, "Received network error or non-101 status code.");
-            return;
-          }
-          if (protocols.length !== 0 && !response.headersList.get("Sec-WebSocket-Protocol")) {
-            failWebsocketConnection(ws, "Server did not respond with sent protocols.");
-            return;
-          }
-          if (response.headersList.get("Upgrade")?.toLowerCase() !== "websocket") {
-            failWebsocketConnection(ws, 'Server did not set Upgrade header to "websocket".');
-            return;
-          }
-          if (response.headersList.get("Connection")?.toLowerCase() !== "upgrade") {
-            failWebsocketConnection(ws, 'Server did not set Connection header to "upgrade".');
-            return;
-          }
-          const secWSAccept = response.headersList.get("Sec-WebSocket-Accept");
-          const digest = crypto2.createHash("sha1").update(keyValue + uid).digest("base64");
-          if (secWSAccept !== digest) {
-            failWebsocketConnection(ws, "Incorrect hash received in Sec-WebSocket-Accept header.");
-            return;
-          }
-          const secExtension = response.headersList.get("Sec-WebSocket-Extensions");
-          let extensions;
-          if (secExtension !== null) {
-            extensions = parseExtensions(secExtension);
-            if (!extensions.has("permessage-deflate")) {
-              failWebsocketConnection(ws, "Sec-WebSocket-Extensions header does not match.");
-              return;
-            }
-          }
-          const secProtocol = response.headersList.get("Sec-WebSocket-Protocol");
-          if (secProtocol !== null) {
-            const requestProtocols = getDecodeSplit("sec-websocket-protocol", request.headersList);
-            if (requestProtocols === null || !requestProtocols.includes(secProtocol)) {
-              failWebsocketConnection(ws, "Protocol was not set in the opening handshake.");
-              return;
-            }
-          }
-          response.socket.on("data", onSocketData);
-          response.socket.on("close", onSocketClose);
-          response.socket.on("error", onSocketError);
-          if (channels.open.hasSubscribers) {
-            channels.open.publish({
-              address: response.socket.address(),
-              protocol: secProtocol,
-              extensions: secExtension
-            });
-          }
-          onEstablish(response, extensions);
-        }
-      });
-      return controller;
-    }
-    function closeWebSocketConnection(ws, code, reason, reasonByteLength) {
-      if (isClosing(ws) || isClosed(ws)) {
-      } else if (!isEstablished(ws)) {
-        failWebsocketConnection(ws, "Connection was closed before it was established.");
-        ws[kReadyState] = states.CLOSING;
-      } else if (ws[kSentClose] === sentCloseFrameState.NOT_SENT) {
-        ws[kSentClose] = sentCloseFrameState.PROCESSING;
-        const frame = new WebsocketFrameSend();
-        if (code !== void 0 && reason === void 0) {
-          frame.frameData = Buffer.allocUnsafe(2);
-          frame.frameData.writeUInt16BE(code, 0);
-        } else if (code !== void 0 && reason !== void 0) {
-          frame.frameData = Buffer.allocUnsafe(2 + reasonByteLength);
-          frame.frameData.writeUInt16BE(code, 0);
-          frame.frameData.write(reason, 2, "utf-8");
-        } else {
-          frame.frameData = emptyBuffer;
-        }
-        const socket = ws[kResponse].socket;
-        socket.write(frame.createFrame(opcodes.CLOSE));
-        ws[kSentClose] = sentCloseFrameState.SENT;
-        ws[kReadyState] = states.CLOSING;
-      } else {
-        ws[kReadyState] = states.CLOSING;
-      }
-    }
-    function onSocketData(chunk) {
-      if (!this.ws[kByteParser].write(chunk)) {
-        this.pause();
-      }
-    }
-    function onSocketClose() {
-      const { ws } = this;
-      const { [kResponse]: response } = ws;
-      response.socket.off("data", onSocketData);
-      response.socket.off("close", onSocketClose);
-      response.socket.off("error", onSocketError);
-      const wasClean = ws[kSentClose] === sentCloseFrameState.SENT && ws[kReceivedClose];
-      let code = 1005;
-      let reason = "";
-      const result = ws[kByteParser].closingInfo;
-      if (result && !result.error) {
-        code = result.code ?? 1005;
-        reason = result.reason;
-      } else if (!ws[kReceivedClose]) {
-        code = 1006;
-      }
-      ws[kReadyState] = states.CLOSED;
-      fireEvent("close", ws, (type, init) => new CloseEvent(type, init), {
-        wasClean,
-        code,
-        reason
-      });
-      if (channels.close.hasSubscribers) {
-        channels.close.publish({
-          websocket: ws,
-          code,
-          reason
-        });
-      }
-    }
-    function onSocketError(error2) {
-      const { ws } = this;
-      ws[kReadyState] = states.CLOSING;
-      if (channels.socketError.hasSubscribers) {
-        channels.socketError.publish(error2);
-      }
-      this.destroy();
-    }
-    module2.exports = {
-      establishWebSocketConnection,
-      closeWebSocketConnection
-    };
-  }
-});
-
-// node_modules/undici/lib/web/websocket/permessage-deflate.js
-var require_permessage_deflate = __commonJS({
-  "node_modules/undici/lib/web/websocket/permessage-deflate.js"(exports2, module2) {
-    "use strict";
-    var { createInflateRaw, Z_DEFAULT_WINDOWBITS } = require("node:zlib");
-    var { isValidClientWindowBits } = require_util7();
-    var { MessageSizeExceededError } = require_errors();
-    var tail = Buffer.from([0, 0, 255, 255]);
-    var kBuffer = Symbol("kBuffer");
-    var kLength = Symbol("kLength");
-    var PerMessageDeflate = class {
-      /** @type {import('node:zlib').InflateRaw} */
-      #inflate;
-      #options = {};
-      #maxPayloadSize = 0;
-      /**
-       * @param {Map<string, string>} extensions
-       */
-      constructor(extensions, options) {
-        this.#options.serverNoContextTakeover = extensions.has("server_no_context_takeover");
-        this.#options.serverMaxWindowBits = extensions.get("server_max_window_bits");
-        this.#maxPayloadSize = options.maxPayloadSize;
-      }
-      /**
-       * Decompress a compressed payload.
-       * @param {Buffer} chunk Compressed data
-       * @param {boolean} fin Final fragment flag
-       * @param {Function} callback Callback function
-       */
-      decompress(chunk, fin, callback) {
-        if (!this.#inflate) {
-          let windowBits = Z_DEFAULT_WINDOWBITS;
-          if (this.#options.serverMaxWindowBits) {
-            if (!isValidClientWindowBits(this.#options.serverMaxWindowBits)) {
-              callback(new Error("Invalid server_max_window_bits"));
-              return;
-            }
-            windowBits = Number.parseInt(this.#options.serverMaxWindowBits);
-          }
-          try {
-            this.#inflate = createInflateRaw({ windowBits });
-          } catch (err) {
-            callback(err);
-            return;
-          }
-          this.#inflate[kBuffer] = [];
-          this.#inflate[kLength] = 0;
-          this.#inflate.on("data", (data) => {
-            this.#inflate[kLength] += data.length;
-            if (this.#maxPayloadSize > 0 && this.#inflate[kLength] > this.#maxPayloadSize) {
-              callback(new MessageSizeExceededError());
-              this.#inflate.removeAllListeners();
-              this.#inflate.destroy();
-              this.#inflate = null;
-              return;
-            }
-            this.#inflate[kBuffer].push(data);
-          });
-          this.#inflate.on("error", (err) => {
-            this.#inflate = null;
-            callback(err);
-          });
-        }
-        this.#inflate.write(chunk);
-        if (fin) {
-          this.#inflate.write(tail);
-        }
-        this.#inflate.flush(() => {
-          if (!this.#inflate) {
-            return;
-          }
-          const full = Buffer.concat(this.#inflate[kBuffer], this.#inflate[kLength]);
-          this.#inflate[kBuffer].length = 0;
-          this.#inflate[kLength] = 0;
-          callback(null, full);
-        });
-      }
-    };
-    module2.exports = { PerMessageDeflate };
-  }
-});
-
-// node_modules/undici/lib/web/websocket/receiver.js
-var require_receiver = __commonJS({
-  "node_modules/undici/lib/web/websocket/receiver.js"(exports2, module2) {
-    "use strict";
-    var { Writable } = require("node:stream");
-    var assert = require("node:assert");
-    var { parserStates, opcodes, states, emptyBuffer, sentCloseFrameState } = require_constants5();
-    var { kReadyState, kSentClose, kResponse, kReceivedClose } = require_symbols5();
-    var { channels } = require_diagnostics();
-    var {
-      isValidStatusCode,
-      isValidOpcode,
-      failWebsocketConnection,
-      websocketMessageReceived,
-      utf8Decode,
-      isControlFrame,
-      isTextBinaryFrame,
-      isContinuationFrame
-    } = require_util7();
-    var { WebsocketFrameSend } = require_frame();
-    var { closeWebSocketConnection } = require_connection();
-    var { PerMessageDeflate } = require_permessage_deflate();
-    var { MessageSizeExceededError } = require_errors();
-    function failWebsocketConnectionWithCode(ws, code, reason) {
-      closeWebSocketConnection(ws, code, reason, Buffer.byteLength(reason));
-      failWebsocketConnection(ws, reason);
-    }
-    var ByteParser = class extends Writable {
-      #buffers = [];
-      #fragmentsBytes = 0;
-      #byteOffset = 0;
-      #loop = false;
-      #state = parserStates.INFO;
-      #info = {};
-      #fragments = [];
-      /** @type {Map<string, PerMessageDeflate>} */
-      #extensions;
-      /** @type {number} */
-      #maxFragments;
-      /** @type {number} */
-      #maxPayloadSize;
-      /**
-       * @param {import('./websocket').WebSocket} ws
-       * @param {Map<string, string>|null} extensions
-       * @param {{ maxFragments?: number, maxPayloadSize?: number }} [options]
-       */
-      constructor(ws, extensions, options = {}) {
-        super();
-        this.ws = ws;
-        this.#extensions = extensions == null ? /* @__PURE__ */ new Map() : extensions;
-        this.#maxFragments = options.maxFragments ?? 0;
-        this.#maxPayloadSize = options.maxPayloadSize ?? 0;
-        if (this.#extensions.has("permessage-deflate")) {
-          this.#extensions.set("permessage-deflate", new PerMessageDeflate(extensions, options));
-        }
-      }
-      /**
-       * @param {Buffer} chunk
-       * @param {() => void} callback
-       */
-      _write(chunk, _, callback) {
-        this.#buffers.push(chunk);
-        this.#byteOffset += chunk.length;
-        this.#loop = true;
-        this.run(callback);
-      }
-      #validatePayloadLength() {
-        if (this.#maxPayloadSize > 0 && !isControlFrame(this.#info.opcode) && this.#info.payloadLength + this.#fragmentsBytes > this.#maxPayloadSize) {
-          failWebsocketConnectionWithCode(this.ws, 1009, "Payload size exceeds maximum allowed size");
-          return false;
-        }
-        return true;
-      }
-      /**
-       * Runs whenever a new chunk is received.
-       * Callback is called whenever there are no more chunks buffering,
-       * or not enough bytes are buffered to parse.
-       */
-      run(callback) {
-        while (this.#loop) {
-          if (this.#state === parserStates.INFO) {
-            if (this.#byteOffset < 2) {
-              return callback();
-            }
-            const buffer = this.consume(2);
-            const fin = (buffer[0] & 128) !== 0;
-            const opcode = buffer[0] & 15;
-            const masked = (buffer[1] & 128) === 128;
-            const fragmented = !fin && opcode !== opcodes.CONTINUATION;
-            const payloadLength = buffer[1] & 127;
-            const rsv1 = buffer[0] & 64;
-            const rsv2 = buffer[0] & 32;
-            const rsv3 = buffer[0] & 16;
-            if (!isValidOpcode(opcode)) {
-              failWebsocketConnection(this.ws, "Invalid opcode received");
-              return callback();
-            }
-            if (masked) {
-              failWebsocketConnection(this.ws, "Frame cannot be masked");
-              return callback();
-            }
-            if (rsv1 !== 0 && !this.#extensions.has("permessage-deflate")) {
-              failWebsocketConnection(this.ws, "Expected RSV1 to be clear.");
-              return;
-            }
-            if (rsv2 !== 0 || rsv3 !== 0) {
-              failWebsocketConnection(this.ws, "RSV1, RSV2, RSV3 must be clear");
-              return;
-            }
-            if (fragmented && !isTextBinaryFrame(opcode)) {
-              failWebsocketConnection(this.ws, "Invalid frame type was fragmented.");
-              return;
-            }
-            if (isTextBinaryFrame(opcode) && this.#fragments.length > 0) {
-              failWebsocketConnection(this.ws, "Expected continuation frame");
-              return;
-            }
-            if (this.#info.fragmented && fragmented) {
-              failWebsocketConnection(this.ws, "Fragmented frame exceeded 125 bytes.");
-              return;
-            }
-            if ((payloadLength > 125 || fragmented) && isControlFrame(opcode)) {
-              failWebsocketConnection(this.ws, "Control frame either too large or fragmented");
-              return;
-            }
-            if (isContinuationFrame(opcode) && this.#fragments.length === 0 && !this.#info.compressed) {
-              failWebsocketConnection(this.ws, "Unexpected continuation frame");
-              return;
-            }
-            if (payloadLength <= 125) {
-              this.#info.payloadLength = payloadLength;
-              this.#state = parserStates.READ_DATA;
-              if (!this.#validatePayloadLength()) {
-                return;
-              }
-            } else if (payloadLength === 126) {
-              this.#state = parserStates.PAYLOADLENGTH_16;
-            } else if (payloadLength === 127) {
-              this.#state = parserStates.PAYLOADLENGTH_64;
-            }
-            if (isTextBinaryFrame(opcode)) {
-              this.#info.binaryType = opcode;
-              this.#info.compressed = rsv1 !== 0;
-            }
-            this.#info.opcode = opcode;
-            this.#info.masked = masked;
-            this.#info.fin = fin;
-            this.#info.fragmented = fragmented;
-          } else if (this.#state === parserStates.PAYLOADLENGTH_16) {
-            if (this.#byteOffset < 2) {
-              return callback();
-            }
-            const buffer = this.consume(2);
-            this.#info.payloadLength = buffer.readUInt16BE(0);
-            this.#state = parserStates.READ_DATA;
-            if (!this.#validatePayloadLength()) {
-              return;
-            }
-          } else if (this.#state === parserStates.PAYLOADLENGTH_64) {
-            if (this.#byteOffset < 8) {
-              return callback();
-            }
-            const buffer = this.consume(8);
-            const upper = buffer.readUInt32BE(0);
-            const lower = buffer.readUInt32BE(4);
-            if (upper !== 0 || lower > 2 ** 31 - 1) {
-              failWebsocketConnection(this.ws, "Received payload length > 2^31 bytes.");
-              return;
-            }
-            this.#info.payloadLength = lower;
-            this.#state = parserStates.READ_DATA;
-            if (!this.#validatePayloadLength()) {
-              return;
-            }
-          } else if (this.#state === parserStates.READ_DATA) {
-            if (this.#byteOffset < this.#info.payloadLength) {
-              return callback();
-            }
-            const body = this.consume(this.#info.payloadLength);
-            if (isControlFrame(this.#info.opcode)) {
-              this.#loop = this.parseControlFrame(body);
-              this.#state = parserStates.INFO;
-            } else {
-              if (!this.#info.compressed) {
-                if (!this.writeFragments(body)) {
-                  return;
-                }
-                if (this.#maxPayloadSize > 0 && this.#fragmentsBytes > this.#maxPayloadSize) {
-                  failWebsocketConnectionWithCode(this.ws, 1009, new MessageSizeExceededError().message);
-                  return;
-                }
-                if (!this.#info.fragmented && this.#info.fin) {
-                  websocketMessageReceived(this.ws, this.#info.binaryType, this.consumeFragments());
-                }
-                this.#state = parserStates.INFO;
-              } else {
-                this.#extensions.get("permessage-deflate").decompress(
-                  body,
-                  this.#info.fin,
-                  (error2, data) => {
-                    if (error2) {
-                      const code = error2 instanceof MessageSizeExceededError ? 1009 : 1007;
-                      failWebsocketConnectionWithCode(this.ws, code, error2.message);
-                      return;
-                    }
-                    if (!this.writeFragments(data)) {
-                      return;
-                    }
-                    if (this.#maxPayloadSize > 0 && this.#fragmentsBytes > this.#maxPayloadSize) {
-                      failWebsocketConnectionWithCode(this.ws, 1009, new MessageSizeExceededError().message);
-                      return;
-                    }
-                    if (!this.#info.fin) {
-                      this.#state = parserStates.INFO;
-                      this.#loop = true;
-                      this.run(callback);
-                      return;
-                    }
-                    websocketMessageReceived(this.ws, this.#info.binaryType, this.consumeFragments());
-                    this.#loop = true;
-                    this.#state = parserStates.INFO;
-                    this.run(callback);
-                  }
-                );
-                this.#loop = false;
-                break;
-              }
-            }
-          }
-        }
-      }
-      /**
-       * Take n bytes from the buffered Buffers
-       * @param {number} n
-       * @returns {Buffer}
-       */
-      consume(n) {
-        if (n > this.#byteOffset) {
-          throw new Error("Called consume() before buffers satiated.");
-        } else if (n === 0) {
-          return emptyBuffer;
-        }
-        if (this.#buffers[0].length === n) {
-          this.#byteOffset -= this.#buffers[0].length;
-          return this.#buffers.shift();
-        }
-        const buffer = Buffer.allocUnsafe(n);
-        let offset = 0;
-        while (offset !== n) {
-          const next = this.#buffers[0];
-          const { length } = next;
-          if (length + offset === n) {
-            buffer.set(this.#buffers.shift(), offset);
-            break;
-          } else if (length + offset > n) {
-            buffer.set(next.subarray(0, n - offset), offset);
-            this.#buffers[0] = next.subarray(n - offset);
-            break;
-          } else {
-            buffer.set(this.#buffers.shift(), offset);
-            offset += next.length;
-          }
-        }
-        this.#byteOffset -= n;
-        return buffer;
-      }
-      writeFragments(fragment) {
-        if (this.#maxFragments > 0 && this.#fragments.length === this.#maxFragments) {
-          failWebsocketConnectionWithCode(this.ws, 1008, "Too many message fragments");
-          return false;
-        }
-        this.#fragmentsBytes += fragment.length;
-        this.#fragments.push(fragment);
-        return true;
-      }
-      consumeFragments() {
-        const fragments = this.#fragments;
-        if (fragments.length === 1) {
-          this.#fragmentsBytes = 0;
-          return fragments.shift();
-        }
-        const output = Buffer.concat(fragments, this.#fragmentsBytes);
-        this.#fragments = [];
-        this.#fragmentsBytes = 0;
-        return output;
-      }
-      parseCloseBody(data) {
-        assert(data.length !== 1);
-        let code;
-        if (data.length >= 2) {
-          code = data.readUInt16BE(0);
-        }
-        if (code !== void 0 && !isValidStatusCode(code)) {
-          return { code: 1002, reason: "Invalid status code", error: true };
-        }
-        let reason = data.subarray(2);
-        if (reason[0] === 239 && reason[1] === 187 && reason[2] === 191) {
-          reason = reason.subarray(3);
-        }
-        try {
-          reason = utf8Decode(reason);
-        } catch {
-          return { code: 1007, reason: "Invalid UTF-8", error: true };
-        }
-        return { code, reason, error: false };
-      }
-      /**
-       * Parses control frames.
-       * @param {Buffer} body
-       */
-      parseControlFrame(body) {
-        const { opcode, payloadLength } = this.#info;
-        if (opcode === opcodes.CLOSE) {
-          if (payloadLength === 1) {
-            failWebsocketConnection(this.ws, "Received close frame with a 1-byte body.");
-            return false;
-          }
-          this.#info.closeInfo = this.parseCloseBody(body);
-          if (this.#info.closeInfo.error) {
-            const { code, reason } = this.#info.closeInfo;
-            closeWebSocketConnection(this.ws, code, reason, reason.length);
-            failWebsocketConnection(this.ws, reason);
-            return false;
-          }
-          if (this.ws[kSentClose] !== sentCloseFrameState.SENT) {
-            let body2 = emptyBuffer;
-            if (this.#info.closeInfo.code) {
-              body2 = Buffer.allocUnsafe(2);
-              body2.writeUInt16BE(this.#info.closeInfo.code, 0);
-            }
-            const closeFrame = new WebsocketFrameSend(body2);
-            this.ws[kResponse].socket.write(
-              closeFrame.createFrame(opcodes.CLOSE),
-              (err) => {
-                if (!err) {
-                  this.ws[kSentClose] = sentCloseFrameState.SENT;
-                }
-              }
-            );
-          }
-          this.ws[kReadyState] = states.CLOSING;
-          this.ws[kReceivedClose] = true;
-          return false;
-        } else if (opcode === opcodes.PING) {
-          if (!this.ws[kReceivedClose]) {
-            const frame = new WebsocketFrameSend(body);
-            this.ws[kResponse].socket.write(frame.createFrame(opcodes.PONG));
-            if (channels.ping.hasSubscribers) {
-              channels.ping.publish({
-                payload: body
-              });
-            }
-          }
-        } else if (opcode === opcodes.PONG) {
-          if (channels.pong.hasSubscribers) {
-            channels.pong.publish({
-              payload: body
-            });
-          }
-        }
-        return true;
-      }
-      get closingInfo() {
-        return this.#info.closeInfo;
-      }
-    };
-    module2.exports = {
-      ByteParser
-    };
-  }
-});
-
-// node_modules/undici/lib/web/websocket/sender.js
-var require_sender = __commonJS({
-  "node_modules/undici/lib/web/websocket/sender.js"(exports2, module2) {
-    "use strict";
-    var { WebsocketFrameSend } = require_frame();
-    var { opcodes, sendHints } = require_constants5();
-    var FixedQueue = require_fixed_queue();
-    var FastBuffer = Buffer[Symbol.species];
-    var SendQueue = class {
-      /**
-       * @type {FixedQueue}
-       */
-      #queue = new FixedQueue();
-      /**
-       * @type {boolean}
-       */
-      #running = false;
-      /** @type {import('node:net').Socket} */
-      #socket;
-      constructor(socket) {
-        this.#socket = socket;
-      }
-      add(item, cb, hint) {
-        if (hint !== sendHints.blob) {
-          const frame = createFrame(item, hint);
-          if (!this.#running) {
-            this.#socket.write(frame, cb);
-          } else {
-            const node2 = {
-              promise: null,
-              callback: cb,
-              frame
-            };
-            this.#queue.push(node2);
-          }
-          return;
-        }
-        const node = {
-          promise: item.arrayBuffer().then((ab) => {
-            node.promise = null;
-            node.frame = createFrame(ab, hint);
-          }),
-          callback: cb,
-          frame: null
-        };
-        this.#queue.push(node);
-        if (!this.#running) {
-          this.#run();
-        }
-      }
-      async #run() {
-        this.#running = true;
-        const queue = this.#queue;
-        while (!queue.isEmpty()) {
-          const node = queue.shift();
-          if (node.promise !== null) {
-            await node.promise;
-          }
-          this.#socket.write(node.frame, node.callback);
-          node.callback = node.frame = null;
-        }
-        this.#running = false;
-      }
-    };
-    function createFrame(data, hint) {
-      return new WebsocketFrameSend(toBuffer(data, hint)).createFrame(hint === sendHints.string ? opcodes.TEXT : opcodes.BINARY);
-    }
-    function toBuffer(data, hint) {
-      switch (hint) {
-        case sendHints.string:
-          return Buffer.from(data);
-        case sendHints.arrayBuffer:
-        case sendHints.blob:
-          return new FastBuffer(data);
-        case sendHints.typedArray:
-          return new FastBuffer(data.buffer, data.byteOffset, data.byteLength);
-      }
-    }
-    module2.exports = { SendQueue };
-  }
-});
-
-// node_modules/undici/lib/web/websocket/websocket.js
+// undici-websocket-stub:./lib/web/websocket/websocket
 var require_websocket = __commonJS({
-  "node_modules/undici/lib/web/websocket/websocket.js"(exports2, module2) {
-    "use strict";
-    var { webidl } = require_webidl();
-    var { URLSerializer } = require_data_url();
-    var { environmentSettingsObject } = require_util2();
-    var { staticPropertyDescriptors, states, sentCloseFrameState, sendHints } = require_constants5();
-    var {
-      kWebSocketURL,
-      kReadyState,
-      kController,
-      kBinaryType,
-      kResponse,
-      kSentClose,
-      kByteParser
-    } = require_symbols5();
-    var {
-      isConnecting,
-      isEstablished,
-      isClosing,
-      isValidSubprotocol,
-      fireEvent
-    } = require_util7();
-    var { establishWebSocketConnection, closeWebSocketConnection } = require_connection();
-    var { ByteParser } = require_receiver();
-    var { kEnumerableProperty, isBlobLike } = require_util();
-    var { getGlobalDispatcher } = require_global2();
-    var { types } = require("node:util");
-    var { ErrorEvent, CloseEvent } = require_events();
-    var { SendQueue } = require_sender();
-    var WebSocket = class _WebSocket extends EventTarget {
-      #events = {
-        open: null,
-        error: null,
-        close: null,
-        message: null
-      };
-      #bufferedAmount = 0;
-      #protocol = "";
-      #extensions = "";
-      /** @type {SendQueue} */
-      #sendQueue;
-      /**
-       * @param {string} url
-       * @param {string|string[]} protocols
-       */
-      constructor(url, protocols = []) {
-        super();
-        webidl.util.markAsUncloneable(this);
-        const prefix = "WebSocket constructor";
-        webidl.argumentLengthCheck(arguments, 1, prefix);
-        const options = webidl.converters["DOMString or sequence<DOMString> or WebSocketInit"](protocols, prefix, "options");
-        url = webidl.converters.USVString(url, prefix, "url");
-        protocols = options.protocols;
-        const baseURL = environmentSettingsObject.settingsObject.baseUrl;
-        let urlRecord;
-        try {
-          urlRecord = new URL(url, baseURL);
-        } catch (e) {
-          throw new DOMException(e, "SyntaxError");
-        }
-        if (urlRecord.protocol === "http:") {
-          urlRecord.protocol = "ws:";
-        } else if (urlRecord.protocol === "https:") {
-          urlRecord.protocol = "wss:";
-        }
-        if (urlRecord.protocol !== "ws:" && urlRecord.protocol !== "wss:") {
-          throw new DOMException(
-            `Expected a ws: or wss: protocol, got ${urlRecord.protocol}`,
-            "SyntaxError"
-          );
-        }
-        if (urlRecord.hash || urlRecord.href.endsWith("#")) {
-          throw new DOMException("Got fragment", "SyntaxError");
-        }
-        if (typeof protocols === "string") {
-          protocols = [protocols];
-        }
-        if (protocols.length !== new Set(protocols.map((p) => p.toLowerCase())).size) {
-          throw new DOMException("Invalid Sec-WebSocket-Protocol value", "SyntaxError");
-        }
-        if (protocols.length > 0 && !protocols.every((p) => isValidSubprotocol(p))) {
-          throw new DOMException("Invalid Sec-WebSocket-Protocol value", "SyntaxError");
-        }
-        this[kWebSocketURL] = new URL(urlRecord.href);
-        const client = environmentSettingsObject.settingsObject;
-        this[kController] = establishWebSocketConnection(
-          urlRecord,
-          protocols,
-          client,
-          this,
-          (response, extensions) => this.#onConnectionEstablished(response, extensions),
-          options
-        );
-        this[kReadyState] = _WebSocket.CONNECTING;
-        this[kSentClose] = sentCloseFrameState.NOT_SENT;
-        this[kBinaryType] = "blob";
-      }
-      /**
-       * @see https://websockets.spec.whatwg.org/#dom-websocket-close
-       * @param {number|undefined} code
-       * @param {string|undefined} reason
-       */
-      close(code = void 0, reason = void 0) {
-        webidl.brandCheck(this, _WebSocket);
-        const prefix = "WebSocket.close";
-        if (code !== void 0) {
-          code = webidl.converters["unsigned short"](code, prefix, "code", { clamp: true });
-        }
-        if (reason !== void 0) {
-          reason = webidl.converters.USVString(reason, prefix, "reason");
-        }
-        if (code !== void 0) {
-          if (code !== 1e3 && (code < 3e3 || code > 4999)) {
-            throw new DOMException("invalid code", "InvalidAccessError");
-          }
-        }
-        let reasonByteLength = 0;
-        if (reason !== void 0) {
-          reasonByteLength = Buffer.byteLength(reason);
-          if (reasonByteLength > 123) {
-            throw new DOMException(
-              `Reason must be less than 123 bytes; received ${reasonByteLength}`,
-              "SyntaxError"
-            );
-          }
-        }
-        closeWebSocketConnection(this, code, reason, reasonByteLength);
-      }
-      /**
-       * @see https://websockets.spec.whatwg.org/#dom-websocket-send
-       * @param {NodeJS.TypedArray|ArrayBuffer|Blob|string} data
-       */
-      send(data) {
-        webidl.brandCheck(this, _WebSocket);
-        const prefix = "WebSocket.send";
-        webidl.argumentLengthCheck(arguments, 1, prefix);
-        data = webidl.converters.WebSocketSendData(data, prefix, "data");
-        if (isConnecting(this)) {
-          throw new DOMException("Sent before connected.", "InvalidStateError");
-        }
-        if (!isEstablished(this) || isClosing(this)) {
-          return;
-        }
-        if (typeof data === "string") {
-          const length = Buffer.byteLength(data);
-          this.#bufferedAmount += length;
-          this.#sendQueue.add(data, () => {
-            this.#bufferedAmount -= length;
-          }, sendHints.string);
-        } else if (types.isArrayBuffer(data)) {
-          this.#bufferedAmount += data.byteLength;
-          this.#sendQueue.add(data, () => {
-            this.#bufferedAmount -= data.byteLength;
-          }, sendHints.arrayBuffer);
-        } else if (ArrayBuffer.isView(data)) {
-          this.#bufferedAmount += data.byteLength;
-          this.#sendQueue.add(data, () => {
-            this.#bufferedAmount -= data.byteLength;
-          }, sendHints.typedArray);
-        } else if (isBlobLike(data)) {
-          this.#bufferedAmount += data.size;
-          this.#sendQueue.add(data, () => {
-            this.#bufferedAmount -= data.size;
-          }, sendHints.blob);
-        }
-      }
-      get readyState() {
-        webidl.brandCheck(this, _WebSocket);
-        return this[kReadyState];
-      }
-      get bufferedAmount() {
-        webidl.brandCheck(this, _WebSocket);
-        return this.#bufferedAmount;
-      }
-      get url() {
-        webidl.brandCheck(this, _WebSocket);
-        return URLSerializer(this[kWebSocketURL]);
-      }
-      get extensions() {
-        webidl.brandCheck(this, _WebSocket);
-        return this.#extensions;
-      }
-      get protocol() {
-        webidl.brandCheck(this, _WebSocket);
-        return this.#protocol;
-      }
-      get onopen() {
-        webidl.brandCheck(this, _WebSocket);
-        return this.#events.open;
-      }
-      set onopen(fn) {
-        webidl.brandCheck(this, _WebSocket);
-        if (this.#events.open) {
-          this.removeEventListener("open", this.#events.open);
-        }
-        if (typeof fn === "function") {
-          this.#events.open = fn;
-          this.addEventListener("open", fn);
-        } else {
-          this.#events.open = null;
-        }
-      }
-      get onerror() {
-        webidl.brandCheck(this, _WebSocket);
-        return this.#events.error;
-      }
-      set onerror(fn) {
-        webidl.brandCheck(this, _WebSocket);
-        if (this.#events.error) {
-          this.removeEventListener("error", this.#events.error);
-        }
-        if (typeof fn === "function") {
-          this.#events.error = fn;
-          this.addEventListener("error", fn);
-        } else {
-          this.#events.error = null;
-        }
-      }
-      get onclose() {
-        webidl.brandCheck(this, _WebSocket);
-        return this.#events.close;
-      }
-      set onclose(fn) {
-        webidl.brandCheck(this, _WebSocket);
-        if (this.#events.close) {
-          this.removeEventListener("close", this.#events.close);
-        }
-        if (typeof fn === "function") {
-          this.#events.close = fn;
-          this.addEventListener("close", fn);
-        } else {
-          this.#events.close = null;
-        }
-      }
-      get onmessage() {
-        webidl.brandCheck(this, _WebSocket);
-        return this.#events.message;
-      }
-      set onmessage(fn) {
-        webidl.brandCheck(this, _WebSocket);
-        if (this.#events.message) {
-          this.removeEventListener("message", this.#events.message);
-        }
-        if (typeof fn === "function") {
-          this.#events.message = fn;
-          this.addEventListener("message", fn);
-        } else {
-          this.#events.message = null;
-        }
-      }
-      get binaryType() {
-        webidl.brandCheck(this, _WebSocket);
-        return this[kBinaryType];
-      }
-      set binaryType(type) {
-        webidl.brandCheck(this, _WebSocket);
-        if (type !== "blob" && type !== "arraybuffer") {
-          this[kBinaryType] = "blob";
-        } else {
-          this[kBinaryType] = type;
-        }
-      }
-      /**
-       * @see https://websockets.spec.whatwg.org/#feedback-from-the-protocol
-       */
-      #onConnectionEstablished(response, parsedExtensions) {
-        this[kResponse] = response;
-        const webSocketOptions = this[kController]?.dispatcher?.webSocketOptions;
-        const maxFragments = webSocketOptions?.maxFragments;
-        const maxPayloadSize = webSocketOptions?.maxPayloadSize;
-        const parser = new ByteParser(this, parsedExtensions, {
-          maxFragments,
-          maxPayloadSize
-        });
-        parser.on("drain", onParserDrain);
-        parser.on("error", onParserError.bind(this));
-        response.socket.ws = this;
-        this[kByteParser] = parser;
-        this.#sendQueue = new SendQueue(response.socket);
-        this[kReadyState] = states.OPEN;
-        const extensions = response.headersList.get("sec-websocket-extensions");
-        if (extensions !== null) {
-          this.#extensions = extensions;
-        }
-        const protocol = response.headersList.get("sec-websocket-protocol");
-        if (protocol !== null) {
-          this.#protocol = protocol;
-        }
-        fireEvent("open", this);
-      }
-    };
-    WebSocket.CONNECTING = WebSocket.prototype.CONNECTING = states.CONNECTING;
-    WebSocket.OPEN = WebSocket.prototype.OPEN = states.OPEN;
-    WebSocket.CLOSING = WebSocket.prototype.CLOSING = states.CLOSING;
-    WebSocket.CLOSED = WebSocket.prototype.CLOSED = states.CLOSED;
-    Object.defineProperties(WebSocket.prototype, {
-      CONNECTING: staticPropertyDescriptors,
-      OPEN: staticPropertyDescriptors,
-      CLOSING: staticPropertyDescriptors,
-      CLOSED: staticPropertyDescriptors,
-      url: kEnumerableProperty,
-      readyState: kEnumerableProperty,
-      bufferedAmount: kEnumerableProperty,
-      onopen: kEnumerableProperty,
-      onerror: kEnumerableProperty,
-      onclose: kEnumerableProperty,
-      close: kEnumerableProperty,
-      onmessage: kEnumerableProperty,
-      binaryType: kEnumerableProperty,
-      send: kEnumerableProperty,
-      extensions: kEnumerableProperty,
-      protocol: kEnumerableProperty,
-      [Symbol.toStringTag]: {
-        value: "WebSocket",
-        writable: false,
-        enumerable: false,
-        configurable: true
-      }
-    });
-    Object.defineProperties(WebSocket, {
-      CONNECTING: staticPropertyDescriptors,
-      OPEN: staticPropertyDescriptors,
-      CLOSING: staticPropertyDescriptors,
-      CLOSED: staticPropertyDescriptors
-    });
-    webidl.converters["sequence<DOMString>"] = webidl.sequenceConverter(
-      webidl.converters.DOMString
-    );
-    webidl.converters["DOMString or sequence<DOMString>"] = function(V, prefix, argument) {
-      if (webidl.util.Type(V) === "Object" && Symbol.iterator in V) {
-        return webidl.converters["sequence<DOMString>"](V);
-      }
-      return webidl.converters.DOMString(V, prefix, argument);
-    };
-    webidl.converters.WebSocketInit = webidl.dictionaryConverter([
-      {
-        key: "protocols",
-        converter: webidl.converters["DOMString or sequence<DOMString>"],
-        defaultValue: () => new Array(0)
-      },
-      {
-        key: "dispatcher",
-        converter: webidl.converters.any,
-        defaultValue: () => getGlobalDispatcher()
-      },
-      {
-        key: "headers",
-        converter: webidl.nullableConverter(webidl.converters.HeadersInit)
-      }
-    ]);
-    webidl.converters["DOMString or sequence<DOMString> or WebSocketInit"] = function(V) {
-      if (webidl.util.Type(V) === "Object" && !(Symbol.iterator in V)) {
-        return webidl.converters.WebSocketInit(V);
-      }
-      return { protocols: webidl.converters["DOMString or sequence<DOMString>"](V) };
-    };
-    webidl.converters.WebSocketSendData = function(V) {
-      if (webidl.util.Type(V) === "Object") {
-        if (isBlobLike(V)) {
-          return webidl.converters.Blob(V, { strict: false });
-        }
-        if (ArrayBuffer.isView(V) || types.isArrayBuffer(V)) {
-          return webidl.converters.BufferSource(V);
-        }
-      }
-      return webidl.converters.USVString(V);
-    };
-    function onParserDrain() {
-      this.ws[kResponse].socket.resume();
-    }
-    function onParserError(err) {
-      let message;
-      let code;
-      if (err instanceof CloseEvent) {
-        message = err.reason;
-        code = err.code;
-      } else {
-        message = err.message;
-      }
-      fireEvent("error", this, () => new ErrorEvent("error", { error: err, message }));
-      closeWebSocketConnection(this, code);
-    }
-    module2.exports = {
-      WebSocket
-    };
+  "undici-websocket-stub:./lib/web/websocket/websocket"(exports2, module2) {
+    module2.exports = {};
   }
 });
 
 // node_modules/undici/lib/web/eventsource/util.js
-var require_util8 = __commonJS({
+var require_util7 = __commonJS({
   "node_modules/undici/lib/web/eventsource/util.js"(exports2, module2) {
     "use strict";
     function isValidLastEventId(value) {
@@ -18182,7 +16495,7 @@ var require_eventsource_stream = __commonJS({
   "node_modules/undici/lib/web/eventsource/eventsource-stream.js"(exports2, module2) {
     "use strict";
     var { Transform } = require("node:stream");
-    var { isASCIINumber, isValidLastEventId } = require_util8();
+    var { isASCIINumber, isValidLastEventId } = require_util7();
     var BOM = [239, 187, 191];
     var LF = 10;
     var CR = 13;
@@ -18517,6 +16830,272 @@ ${value}`;
   }
 });
 
+// node_modules/undici/lib/web/websocket/events.js
+var require_events2 = __commonJS({
+  "node_modules/undici/lib/web/websocket/events.js"(exports2, module2) {
+    "use strict";
+    var { webidl } = require_webidl();
+    var { kEnumerableProperty } = require_util();
+    var { kConstruct } = require_symbols();
+    var { MessagePort } = require("node:worker_threads");
+    var MessageEvent = class _MessageEvent extends Event {
+      #eventInit;
+      constructor(type, eventInitDict = {}) {
+        if (type === kConstruct) {
+          super(arguments[1], arguments[2]);
+          webidl.util.markAsUncloneable(this);
+          return;
+        }
+        const prefix = "MessageEvent constructor";
+        webidl.argumentLengthCheck(arguments, 1, prefix);
+        type = webidl.converters.DOMString(type, prefix, "type");
+        eventInitDict = webidl.converters.MessageEventInit(eventInitDict, prefix, "eventInitDict");
+        super(type, eventInitDict);
+        this.#eventInit = eventInitDict;
+        webidl.util.markAsUncloneable(this);
+      }
+      get data() {
+        webidl.brandCheck(this, _MessageEvent);
+        return this.#eventInit.data;
+      }
+      get origin() {
+        webidl.brandCheck(this, _MessageEvent);
+        return this.#eventInit.origin;
+      }
+      get lastEventId() {
+        webidl.brandCheck(this, _MessageEvent);
+        return this.#eventInit.lastEventId;
+      }
+      get source() {
+        webidl.brandCheck(this, _MessageEvent);
+        return this.#eventInit.source;
+      }
+      get ports() {
+        webidl.brandCheck(this, _MessageEvent);
+        if (!Object.isFrozen(this.#eventInit.ports)) {
+          Object.freeze(this.#eventInit.ports);
+        }
+        return this.#eventInit.ports;
+      }
+      initMessageEvent(type, bubbles = false, cancelable = false, data = null, origin = "", lastEventId = "", source = null, ports = []) {
+        webidl.brandCheck(this, _MessageEvent);
+        webidl.argumentLengthCheck(arguments, 1, "MessageEvent.initMessageEvent");
+        return new _MessageEvent(type, {
+          bubbles,
+          cancelable,
+          data,
+          origin,
+          lastEventId,
+          source,
+          ports
+        });
+      }
+      static createFastMessageEvent(type, init) {
+        const messageEvent = new _MessageEvent(kConstruct, type, init);
+        messageEvent.#eventInit = init;
+        messageEvent.#eventInit.data ??= null;
+        messageEvent.#eventInit.origin ??= "";
+        messageEvent.#eventInit.lastEventId ??= "";
+        messageEvent.#eventInit.source ??= null;
+        messageEvent.#eventInit.ports ??= [];
+        return messageEvent;
+      }
+    };
+    var { createFastMessageEvent } = MessageEvent;
+    delete MessageEvent.createFastMessageEvent;
+    var CloseEvent = class _CloseEvent extends Event {
+      #eventInit;
+      constructor(type, eventInitDict = {}) {
+        const prefix = "CloseEvent constructor";
+        webidl.argumentLengthCheck(arguments, 1, prefix);
+        type = webidl.converters.DOMString(type, prefix, "type");
+        eventInitDict = webidl.converters.CloseEventInit(eventInitDict);
+        super(type, eventInitDict);
+        this.#eventInit = eventInitDict;
+        webidl.util.markAsUncloneable(this);
+      }
+      get wasClean() {
+        webidl.brandCheck(this, _CloseEvent);
+        return this.#eventInit.wasClean;
+      }
+      get code() {
+        webidl.brandCheck(this, _CloseEvent);
+        return this.#eventInit.code;
+      }
+      get reason() {
+        webidl.brandCheck(this, _CloseEvent);
+        return this.#eventInit.reason;
+      }
+    };
+    var ErrorEvent = class _ErrorEvent extends Event {
+      #eventInit;
+      constructor(type, eventInitDict) {
+        const prefix = "ErrorEvent constructor";
+        webidl.argumentLengthCheck(arguments, 1, prefix);
+        super(type, eventInitDict);
+        webidl.util.markAsUncloneable(this);
+        type = webidl.converters.DOMString(type, prefix, "type");
+        eventInitDict = webidl.converters.ErrorEventInit(eventInitDict ?? {});
+        this.#eventInit = eventInitDict;
+      }
+      get message() {
+        webidl.brandCheck(this, _ErrorEvent);
+        return this.#eventInit.message;
+      }
+      get filename() {
+        webidl.brandCheck(this, _ErrorEvent);
+        return this.#eventInit.filename;
+      }
+      get lineno() {
+        webidl.brandCheck(this, _ErrorEvent);
+        return this.#eventInit.lineno;
+      }
+      get colno() {
+        webidl.brandCheck(this, _ErrorEvent);
+        return this.#eventInit.colno;
+      }
+      get error() {
+        webidl.brandCheck(this, _ErrorEvent);
+        return this.#eventInit.error;
+      }
+    };
+    Object.defineProperties(MessageEvent.prototype, {
+      [Symbol.toStringTag]: {
+        value: "MessageEvent",
+        configurable: true
+      },
+      data: kEnumerableProperty,
+      origin: kEnumerableProperty,
+      lastEventId: kEnumerableProperty,
+      source: kEnumerableProperty,
+      ports: kEnumerableProperty,
+      initMessageEvent: kEnumerableProperty
+    });
+    Object.defineProperties(CloseEvent.prototype, {
+      [Symbol.toStringTag]: {
+        value: "CloseEvent",
+        configurable: true
+      },
+      reason: kEnumerableProperty,
+      code: kEnumerableProperty,
+      wasClean: kEnumerableProperty
+    });
+    Object.defineProperties(ErrorEvent.prototype, {
+      [Symbol.toStringTag]: {
+        value: "ErrorEvent",
+        configurable: true
+      },
+      message: kEnumerableProperty,
+      filename: kEnumerableProperty,
+      lineno: kEnumerableProperty,
+      colno: kEnumerableProperty,
+      error: kEnumerableProperty
+    });
+    webidl.converters.MessagePort = webidl.interfaceConverter(MessagePort);
+    webidl.converters["sequence<MessagePort>"] = webidl.sequenceConverter(
+      webidl.converters.MessagePort
+    );
+    var eventInit = [
+      {
+        key: "bubbles",
+        converter: webidl.converters.boolean,
+        defaultValue: () => false
+      },
+      {
+        key: "cancelable",
+        converter: webidl.converters.boolean,
+        defaultValue: () => false
+      },
+      {
+        key: "composed",
+        converter: webidl.converters.boolean,
+        defaultValue: () => false
+      }
+    ];
+    webidl.converters.MessageEventInit = webidl.dictionaryConverter([
+      ...eventInit,
+      {
+        key: "data",
+        converter: webidl.converters.any,
+        defaultValue: () => null
+      },
+      {
+        key: "origin",
+        converter: webidl.converters.USVString,
+        defaultValue: () => ""
+      },
+      {
+        key: "lastEventId",
+        converter: webidl.converters.DOMString,
+        defaultValue: () => ""
+      },
+      {
+        key: "source",
+        // Node doesn't implement WindowProxy or ServiceWorker, so the only
+        // valid value for source is a MessagePort.
+        converter: webidl.nullableConverter(webidl.converters.MessagePort),
+        defaultValue: () => null
+      },
+      {
+        key: "ports",
+        converter: webidl.converters["sequence<MessagePort>"],
+        defaultValue: () => new Array(0)
+      }
+    ]);
+    webidl.converters.CloseEventInit = webidl.dictionaryConverter([
+      ...eventInit,
+      {
+        key: "wasClean",
+        converter: webidl.converters.boolean,
+        defaultValue: () => false
+      },
+      {
+        key: "code",
+        converter: webidl.converters["unsigned short"],
+        defaultValue: () => 0
+      },
+      {
+        key: "reason",
+        converter: webidl.converters.USVString,
+        defaultValue: () => ""
+      }
+    ]);
+    webidl.converters.ErrorEventInit = webidl.dictionaryConverter([
+      ...eventInit,
+      {
+        key: "message",
+        converter: webidl.converters.DOMString,
+        defaultValue: () => ""
+      },
+      {
+        key: "filename",
+        converter: webidl.converters.USVString,
+        defaultValue: () => ""
+      },
+      {
+        key: "lineno",
+        converter: webidl.converters["unsigned long"],
+        defaultValue: () => 0
+      },
+      {
+        key: "colno",
+        converter: webidl.converters["unsigned long"],
+        defaultValue: () => 0
+      },
+      {
+        key: "error",
+        converter: webidl.converters.any
+      }
+    ]);
+    module2.exports = {
+      MessageEvent,
+      CloseEvent,
+      ErrorEvent,
+      createFastMessageEvent
+    };
+  }
+});
+
 // node_modules/undici/lib/web/eventsource/eventsource.js
 var require_eventsource = __commonJS({
   "node_modules/undici/lib/web/eventsource/eventsource.js"(exports2, module2) {
@@ -18527,9 +17106,9 @@ var require_eventsource = __commonJS({
     var { webidl } = require_webidl();
     var { EventSourceStream } = require_eventsource_stream();
     var { parseMIMEType } = require_data_url();
-    var { createFastMessageEvent } = require_events();
+    var { createFastMessageEvent } = require_events2();
     var { isNetworkError } = require_response();
-    var { delay } = require_util8();
+    var { delay } = require_util7();
     var { kEnumerableProperty } = require_util();
     var { environmentSettingsObject } = require_util2();
     var experimentalWarned = false;
@@ -18957,7 +17536,7 @@ var require_undici = __commonJS({
 });
 
 // node_modules/@actions/tool-cache/node_modules/semver/internal/constants.js
-var require_constants6 = __commonJS({
+var require_constants5 = __commonJS({
   "node_modules/@actions/tool-cache/node_modules/semver/internal/constants.js"(exports2, module2) {
     "use strict";
     var SEMVER_SPEC_VERSION = "2.0.0";
@@ -19006,7 +17585,7 @@ var require_re = __commonJS({
       MAX_SAFE_COMPONENT_LENGTH,
       MAX_SAFE_BUILD_LENGTH,
       MAX_LENGTH
-    } = require_constants6();
+    } = require_constants5();
     var debug2 = require_debug();
     exports2 = module2.exports = {};
     var re = exports2.re = [];
@@ -19135,7 +17714,7 @@ var require_semver = __commonJS({
   "node_modules/@actions/tool-cache/node_modules/semver/classes/semver.js"(exports2, module2) {
     "use strict";
     var debug2 = require_debug();
-    var { MAX_LENGTH, MAX_SAFE_INTEGER } = require_constants6();
+    var { MAX_LENGTH, MAX_SAFE_INTEGER } = require_constants5();
     var { safeRe: re, t } = require_re();
     var parseOptions = require_parse_options();
     var { compareIdentifiers } = require_identifiers();
@@ -19806,7 +18385,7 @@ var require_truncate = __commonJS({
   "node_modules/@actions/tool-cache/node_modules/semver/functions/truncate.js"(exports2, module2) {
     "use strict";
     var parse = require_parse2();
-    var constants3 = require_constants6();
+    var constants3 = require_constants5();
     var SemVer = require_semver();
     var truncate = (version, truncation, options) => {
       if (!constants3.RELEASE_TYPES.includes(truncation)) {
@@ -20039,7 +18618,7 @@ var require_range = __commonJS({
       tildeTrimReplace,
       caretTrimReplace
     } = require_re();
-    var { FLAG_INCLUDE_PRERELEASE, FLAG_LOOSE } = require_constants6();
+    var { FLAG_INCLUDE_PRERELEASE, FLAG_LOOSE } = require_constants5();
     var BUILDSTRIPRE = new RegExp(src[t.BUILD], "g");
     var isNullSet = (c) => c.value === "<0.0.0-0";
     var isAny = (c) => c.value === "";
@@ -20858,7 +19437,7 @@ var require_semver2 = __commonJS({
   "node_modules/@actions/tool-cache/node_modules/semver/index.js"(exports2, module2) {
     "use strict";
     var internalRe = require_re();
-    var constants3 = require_constants6();
+    var constants3 = require_constants5();
     var SemVer = require_semver();
     var identifiers = require_identifiers();
     var parse = require_parse2();
